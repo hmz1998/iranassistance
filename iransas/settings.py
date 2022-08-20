@@ -54,12 +54,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'iransas.urls'
 
+TEMPLATES_DIR = os.path.join(BASE_DIR, config('TEMPLATES_DIR'))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [TEMPLATES_DIR, os.path.join(BASE_DIR, config('DIRS'))],
+        'APP_DIRS': False,
         'OPTIONS': {
+            'loaders': [
+                'apptemplates.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
