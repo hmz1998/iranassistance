@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'painless.apps.PainlessConfig'
     'users.apps.UsersConfig'
+    'pages.apps.PagesConfig'
 ]
 
 MIDDLEWARE = [
