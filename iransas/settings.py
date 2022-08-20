@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!m^oaz12t@f&ki&p&1p6xmwx25qlk!d^p4g_hfx&tj-bbs%xum'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast = lambda v: [ s.strip() for s in v.split(',')])
 
 
 # Application definition
@@ -124,7 +125,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# Static and Upload Directories
+
+STATIC_URL = config('STATIC_URL')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, config('STATIC_DIR')),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, config('COLLECT_STATIC_DIR'))
+
+MEDIA_URL = config('MEDIA_URL')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, config('MEDIA_UPLOAD_DIR'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
