@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'painless.apps.PainlessConfig'
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
