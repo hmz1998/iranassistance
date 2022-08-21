@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class UUIDBaseModel(models.Model):
