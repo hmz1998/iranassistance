@@ -2,57 +2,56 @@ from django.db import models
 from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.utils.translation import ugettext_lazy as _
 
 from django.core.validators import (
     MinLengthValidator,
     EmailValidator
 )
 
-from painless.utils.models.common import UUIDBaseModel
+from painless.models import UUIDBaseModel
 
 from users.managers import UserManager
 
 class User(AbstractBaseUser, UUIDBaseModel, PermissionsMixin):
     USER_TYPE_CHOICES = (
-        ('n', _("Normal user")),
-        ('s', _("Silver user")),
-        ('g', _("Gold user")),
+        ('n', ("Normal user")),
+        ('s', ("Silver user")),
+        ('g', ("Gold user")),
     )
 
     username = models.CharField(
-        _('Username'),
+        ('Username'),
         max_length=15,
         unique=True,
         validators=[MinLengthValidator(5, "Username cannot be less than 5 characters")],
         error_messages={
-            'unique': _("A user with that username already exists."),
+            'unique': ("A user with that username already exists."),
         },
     )
 
     email = models.EmailField(
-        _('email address'),
+        ('email address'),
         validators=[EmailValidator],
         null=True,
         blank=True,
         error_messages={
-            'unique': _("A user with that email already exists."),
+            'unique': ("A user with that email already exists."),
         },
         unique=True
     )
     
     type = models.CharField(
-        _("Type"),
+        ("Type"),
         choices=USER_TYPE_CHOICES,
         max_length=1,
         default = 'n'
     )
 
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(('first name'), max_length=30, blank=True)
+    last_name = models.CharField(('last name'), max_length=30, blank=True)
 
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
-    is_active = models.BooleanField(_('active'), default=False)
+    date_joined = models.DateTimeField(('date joined'), auto_now_add=True)
+    is_active = models.BooleanField(('active'), default=False)
     is_staff = models.BooleanField(default=False)
     last_login = models.DateTimeField(null=True)
 
@@ -63,8 +62,8 @@ class User(AbstractBaseUser, UUIDBaseModel, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = ('user')
+        verbose_name_plural = ('users')
 
     def get_full_name(self):
         '''
