@@ -1,0 +1,43 @@
+{% extends '_Base.html' %}
+
+{%load static%}
+
+{%block body %}
+
+<form id="registerForm" class="col-md-6 offset-3 mt-5">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputFirstname">Firstname</label>
+            <input type="text" class="form-control" id="inputFirstname">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputLastname">Lastname</label>
+            <input type="text" class="form-control" id="inputLastname">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputUsername">Username</label>
+            <input type="text" class="form-control" id="inputUsername">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCPassword">Confirm password</label>
+            <input type="password" class="form-control" id="inputCPassword">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+{%endblock%}

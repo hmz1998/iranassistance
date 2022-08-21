@@ -1,0 +1,22 @@
+{% extends '_Base.html' %}
+
+{%load static%}
+
+{%block body %}
+
+<form id="loginForm" class="col-md-4 offset-4 mt-5">
+
+    <div class="form-group">
+        <label for="inputUsername">Useername</label>
+        <input type="text" class="form-control" id="inputUsername">
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="text" class="form-control" id="inputPassword">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log in</button>
+</form>
+
+{%endblock%}
